@@ -1,0 +1,7 @@
+#homeImg:hover {
+    transform: scale(1.1);
+}
+
+#homeImg {
+    width: 40px;
+}

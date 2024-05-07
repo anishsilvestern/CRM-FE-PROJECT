@@ -1,0 +1,51 @@
+
+
+.gradient-form {
+    background-image: url(https://i.ibb.co/rwnXpkG/TITLE-IMAGE-22-730x410.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+#loginBtn {
+    width: 90%;
+    height: 100%;
+}
+
+.text-white {
+    margin-left: 85px;
+}
+
+    @media (max-width: 462px) {
+        .text-white {
+            display: none;
+        }
+    }
+
+    @media (max-width: 991px) {
+    #imgDiv {
+        display: none;
+    }
+    .text-white {
+        margin: 10px 50px;
+    }
+    }
+
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
+
+    @media (min-width: 1400px) {
+        .container {
+            max-width: 1200px; 
+        }
+    }
+    

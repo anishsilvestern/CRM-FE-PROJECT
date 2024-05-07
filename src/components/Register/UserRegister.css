@@ -1,0 +1,46 @@
+
+.background-image {
+    background-image: url(https://i.ibb.co/NpNWG2V/Waffle-Fabric-Detail.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#createBtn {
+    width: 90%;
+}
+
+#backArrow {
+    height: 40px;
+    position: absolute;
+    bottom: 670px;
+    left: 10px;
+}
+
+.text-danger {
+    margin-left: 13px;
+}
+
+    @media (max-width: 991px) {
+        #imgDiv {
+            display: none;
+        }
+    }
+
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
+
+    @media (min-width: 1400px) {
+        .container {
+            max-width: 1200px; 
+        }
+    }
+    

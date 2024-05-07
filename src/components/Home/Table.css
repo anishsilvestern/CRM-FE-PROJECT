@@ -1,0 +1,26 @@
+.table-container {
+    max-width: 600px;
+    overflow: hidden;
+  }
+  
+  .table-wrapper {
+    max-height: 330px; /* Set the maximum height for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+  
+  #movable-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #movable-table th,
+  #movable-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #movable-table th {
+    background-color: #f2f2f2;
+  }
+  
