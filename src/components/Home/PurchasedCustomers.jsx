@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./Table.css"
+import { HomeContext } from '../Context/HomeContext'
 
 const PurchasedCustomers = () => {
+
+    const { topCustomers } = useContext(HomeContext);
+
+
     const customers = [
         {
             id: 1,
@@ -36,12 +41,12 @@ const PurchasedCustomers = () => {
                 </tr>
             </thead>
             <tbody className="table-group-divider">
-            {customers.map((Customer, index) => ( 
+            {topCustomers.map((Customer, index) => ( 
                 <tr key={index}>  
                 <th scope="row" >{index + 1}</th>
-                <td>{Customer.name}</td>
-                <td>{Customer.sold}</td>
-                <td>{Customer.totalAmt}</td>
+                <td>{Customer.customerName}</td>
+                <td>{Customer.totalPurchases}</td>
+                <td>{`₹${Customer.totalAmountSpent}`}</td>
                 </tr>
             ))} 
             </tbody>

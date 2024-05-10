@@ -19,8 +19,13 @@ import EditDetailsProduct from './components/Products/EditDetailsProduct'
 import Home from './components/Home/Home'
 import Communication from './components/Customer/Contact/Communication'
 import Feedback from './components/Customer/Contact/Feedback'
-
 import { CustomerFillForm } from './components/CustomerDashboard/CustomerFillForm'
+import { LoginProvider } from './components/Context/LoginContext'
+import { CustomerProvider } from './components/Context/CustomerContext'
+import { PrefernceProvider } from './components/Context/PreferenceContext'
+import { ProductProvider } from './components/Context/ProductContext'
+import { CommunicationProvider } from './components/Context/CummunicationContext'
+import { HomeProvider } from './components/Context/HomeContext'
 
 
 const router = createBrowserRouter([
@@ -124,13 +129,24 @@ const router = createBrowserRouter([
 
 
 function App() {
-  
 
   return (
     <>
-      <RouterProvider router={router} />
+    <HomeProvider>
+      <LoginProvider>
+        <ProductProvider>
+          <CustomerProvider>
+            <PrefernceProvider>
+              <CommunicationProvider>
+                <RouterProvider router={router} />
+              </CommunicationProvider>
+            </PrefernceProvider>
+          </CustomerProvider>
+        </ProductProvider>
+      </LoginProvider> 
+    </HomeProvider>  
     </>
-  )
+  );
 }
 
 export default App

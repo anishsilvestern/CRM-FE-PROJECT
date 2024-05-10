@@ -1,12 +1,23 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React from 'react'
+import React, { useContext } from 'react'
+import { CustomerContext } from '../Context/CustomerContext';
+import axios from 'axios';
+import { PrefernceContext } from '../Context/PreferenceContext';
 
 const EditDetailsCustomer = () => {
-        const fabricType = ['Cotton', 'Polyester', 'Silk', 'Wool', 'Nylon', 'Leather'];
-        const sources = ['Facebook', 'Instagram', 'Twitter', 'LinkedIn', 'Google', 'Others'];
-        const status = ['Lead', 'Prospect', 'Repeat Customer']
-        const colours = ['Black', 'Blue', 'Brown', 'Green', 'Grey', 'Orange', 'Pink', 'Purple', 'Red', 'White', 'Yellow'];
-        const designs = ["Print Design", 'Woven Design', 'Knitted Design', 'Non-Woven Design', "Embroidery Design", "Digital Textile Design", 'Fashion Textile Design', "Home Textile Design"];
+
+      const { fabricType, colours, designs, status, sources } = useContext(PrefernceContext);
+
+
+        const token = localStorage.getItem('token')
+
+        const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+
+        const { customers } = useContext(CustomerContext);
+
+        const Customerid = localStorage.getItem('Customerid')
+
+        const data = customers.find(customer => customer.customerId === Customerid)
 
   return (
     <div>
@@ -15,7 +26,9 @@ const EditDetailsCustomer = () => {
       </div>
 
       <Formik 
-            initialValues={{name:"", email:"", address:"", phoneNumber:"", sources:"", status:"", fabricType:[], colour:[], design:[]}}
+            initialValues={{name:data ? data.name : "", email:data ? data.email : "", address:data ? data.address : "", phoneNumber:data ? data.phone : "", sources:data ? data.source : "", status:data ? data.status : "", fabricType:data ? data.fabricType : "", colour:data ? data.colour : "", design:data ? data.design : ""}}
+
+            enableReinitialize={true}
 
             validate={(values) => {
               const errors = {};
@@ -45,8 +58,29 @@ const EditDetailsCustomer = () => {
               return errors;
             }}
 
-            onSubmit={(values) => {
-              console.log(values);
+            onSubmit={ async (values) => {
+
+               const response = await axios.put(apiUrl + "update-customer", {
+                  customerId: data.customerId,
+                  name: values.name,
+                  email: values.email,
+                  address: values.address,
+                  phone: values.phoneNumber,
+                  source: values.sources,
+                  status: values.status,
+                  fabricType: values.fabricType,
+                  colour: values.colour,
+                  design: values.design,         
+               }, {
+                headers: {
+                  auth: token
+                }
+               })
+               if(response.status === 200){
+                  alert("Customer updated successfully")
+               }else{
+                  alert("Customer not updated")
+               }
             }}
             >
              {({dirty}) => (  
@@ -118,7 +152,7 @@ const EditDetailsCustomer = () => {
                   <div className="col-11">
                     
                     <Field as="select" id="status" name="status" className="form-control">
-                      <option value="">Select a source</option>
+                      <option value="">Select a Status</option>
                       {status.map((status, index) => (
                       <option value={status} key={index}>{status}</option>
                     ))}

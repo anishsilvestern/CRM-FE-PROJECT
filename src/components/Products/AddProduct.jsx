@@ -1,23 +1,27 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
-import React from 'react'
+import React, { useContext } from 'react'
+import { PrefernceContext } from '../Context/PreferenceContext';
+import axios from 'axios';
 
 const AddProduct = () => {
-    const fabricType = ['Cotton', 'Polyester', 'Silk', 'Wool', 'Nylon', 'Leather'];
-    const colours = ['Black', 'Blue', 'Brown', 'Green', 'Grey', 'Orange', 'Pink', 'Purple', 'Red', 'White', 'Yellow'];
-    const designs = ["Print Design", 'Woven Design', 'Knitted Design', 'Non-Woven Design', "Embroidery Design", "Digital Textile Design", 'Fashion Textile Design', "Home Textile Design"];
+
+  const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+
+  const token = localStorage.getItem('token')
+
+  const { fabricType, colours, designs, status, sources } = useContext(PrefernceContext);
+
   return (
     <div>
         <div className='text-center p-3' style={{color:"black", fontFamily:"sans-serif", backgroundColor:"#70FFCD"}}>
             <h1>Add Product</h1>
         </div>
         <Formik 
-        initialValues={{productId:"", productName:"",productDescription:"", fabric:'', colour:'', design:'', productPrice:"", productStocks:"", productImageUrl:""}}
+        initialValues={{productName:"",productDescription:"", fabric:'', colour:'', design:'', productPrice:"", productStocks:"", productImageUrl:""}}
 
         validate={(values) => {
             const errors = {};
-            if (!values.productId) {
-                errors.productId = 'Required';
-            }if (!values.productName) {
+            if (!values.productName) {
                 errors.productName = 'Required';
             }if (!values.productDescription) {
                 errors.productDescription = 'Required';
@@ -41,21 +45,36 @@ const AddProduct = () => {
             return errors;
         }}
 
-        onSubmit={(values) => {
-            console.log(values);
+        onSubmit={ async (values) => {
+            try {
+              const resBd = await axios.post(apiUrl + "add-product", {
+                Name: values.productName,
+                Description: values.productDescription,
+                FabricType: values.fabric,
+                Color: values.colour,
+                DesignType: values.design,
+                Price: values.productPrice,
+                Stock: values.productStocks,
+                PhotoUrl: values.productImageUrl
+              }, {
+                headers: {
+                  auth: token
+                }
+              })
+
+              if(resBd.status === 200) {
+                alert("Product added successfully");
+                window.location.href = "/dashboard/all-products";
+              }else {
+                alert("Product not added");
+              }
+              
+            } catch (error) {
+               alert("intenal server error");
+            }
         }}
         >
             <Form>
-                {/* product Id */}
-                <div data-mdb-input-init className="row form-outline m-4">
-                    <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/product.png"/>
-                    </div>
-                    <div className="col-11">
-                      <Field type="text" name="productId" id="productId"  className="form-control" placeholder="Product Id"  />
-                      <ErrorMessage name="productId" component="div" className="text-danger" />
-                    </div>
-                </div>
                 {/* product name */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
@@ -83,7 +102,7 @@ const AddProduct = () => {
                     </div>
                     <div className="col-11">
                     <Field as="select" id="fabric" name="fabric" className="form-control">
-                      <option value="">Select a source</option>
+                      <option value="">Select a Fabric Type</option>
                       {fabricType.map((fabric, index) => (
                       <option value={fabric} key={index}>{fabric}</option>
                     ))}
@@ -98,7 +117,7 @@ const AddProduct = () => {
                     </div>
                     <div className="col-11">
                     <Field as="select" id="colour" name="colour" className="form-control">
-                      <option value="">Select a source</option>
+                      <option value="">Select a Colour</option>
                       {colours.map((colour, index) => (
                       <option value={colour} key={index}>{colour}</option>
                     ))}
@@ -113,7 +132,7 @@ const AddProduct = () => {
                     </div>
                     <div className="col-11">
                     <Field as="select" id="design" name="design" className="form-control">
-                      <option value="">Select a source</option>
+                      <option value="">Select a Design</option>
                       {designs.map((design, index) => (
                       <option value={design} key={index}>{design}</option>
                     ))}

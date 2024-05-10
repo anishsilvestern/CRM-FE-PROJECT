@@ -1,27 +1,52 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./Table.css"
+import { HomeContext } from '../Context/HomeContext';
 
 const MonthsRevenue = () => {
-    const customers = [
-        {
-            id: 1,
-            name: "Customer 1",
-            sold: 123,
-            totalAmt: 1234
-        },
-        {
-            id: 2,
-            name: "Customer 2",
-            sold: 234,
-            totalAmt: 2345
-        },
-        {
-            id: 3,
-            name: "Customer 3",
-            sold: 345,
-            totalAmt: 3456
-        }    
-    ]
+
+    const { monthlyRevenues } = useContext(HomeContext);
+
+
+    
+  // Function to calculate monthly revenue
+function calculateMonthlyRevenue(monthlyRevenues) {
+
+    const monthlyRevenue = {};
+  
+
+    monthlyRevenues.forEach(purchase => {
+
+      const purchaseDate = new Date(purchase.date);
+      const month = purchaseDate.getMonth() + 1; 
+      const year = purchaseDate.getFullYear();
+      const monthKey = `${year}-${month}`; 
+      if (monthlyRevenue[monthKey]) {
+        monthlyRevenue[monthKey] += purchase.total_amount_rs;
+      } else {
+        monthlyRevenue[monthKey] = purchase.total_amount_rs;
+      }
+    });
+  
+    const monthlyRevenueArray = Object.entries(monthlyRevenue).map(([key, value]) => {
+      const [year, month] = key.split('-');
+      return { month: `${getMonthName(parseInt(month))} ${year}`, totalRevenue: value };
+    });
+  
+    return monthlyRevenueArray;
+  }
+  
+  // Function to convert month number to month name
+  function getMonthName(month) {
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    return months[month - 1];
+  }
+
+  const monthlyRevenue = calculateMonthlyRevenue(monthlyRevenues);
+
+    
   return (
     <div className='table-container'>
         <h3 className='text-center'>Months Revenue</h3>
@@ -30,18 +55,16 @@ const MonthsRevenue = () => {
             <thead>
                 <tr>
                 <th scope="col">Months</th>
-                <th scope="col">Product Sold</th>
                 <th scope="col">Total Revenue</th>
                 </tr>
             </thead>
             <tbody className="table-group-divider">
-            {customers.map((Customer, index) => ( 
+            {monthlyRevenue.map((revenue, index) => ( 
                 <tr key={index}>  
-                <th scope="row" >{index + 1}</th>
-                <td>{Customer.name}</td>
-                <td>{Customer.sold}</td>
+                <th scope="row" >{revenue.month}</th>
+                <td>{`₹${revenue.totalRevenue}`}</td>
                 </tr>
-            ))} 
+            ))}  
             </tbody>
         </table>
         </div>

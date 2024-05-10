@@ -1,4 +1,8 @@
+
+
 const SearchModal = ({ isSearchOpen, isSearchCloseModal }) => {
+
+
 
   return (
     <div>
@@ -12,7 +16,7 @@ const SearchModal = ({ isSearchOpen, isSearchCloseModal }) => {
             </div>
             <div className="modal-body">
               {/* Search input field */}
-              <input type="text" className="form-control" placeholder="Enter your search" />
+              <input type="text"   className="form-control" placeholder="Enter your search" onChange={(e) => handleSearchBar(e)} />
             </div>
             {/* Additional content or search results can be added here */}
           </div>

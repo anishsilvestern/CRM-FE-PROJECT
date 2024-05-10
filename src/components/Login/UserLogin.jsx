@@ -2,10 +2,14 @@ import React from 'react'
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import './UserLogin.css'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 
 
 
 const UserLogin = () => {
+
+    const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
 
 
   return (
@@ -42,8 +46,26 @@ const UserLogin = () => {
                             return error;
                             }}
                             
-                            onSubmit={(values) => {
-                                console.log(values);
+                            onSubmit={ async (values) => {
+                                const email = values.email.toLowerCase();
+                                const password = values.password;
+
+                                
+
+                                try {
+                                    const userCheck = await axios.get(apiUrl + `login/?email=${email}&password=${password}`);
+
+                                    console.log(userCheck.data);
+                                    const userData = userCheck.data;
+
+                                    if(userData.length > 0){
+                                        localStorage.setItem("token", userData);
+                                        window.location.href = "/dashboard";
+                                    }
+                                } catch (error) {
+                                   alert("Invalid Credentials")
+                                }
+                                
                             }
                         }>
                             <Form>
@@ -70,9 +92,9 @@ const UserLogin = () => {
                             </Form>
                         </Formik>
 
-                        <div className="text-center">
+                        {/* <div className="text-center">
                           <Link to="/customer-fil-form"><button id='createBtn' className="btn btn-info btn-block fa-lg gradient-custom-2 mb-3" type="submit">Customer Fill Form</button></Link>
-                        </div>
+                        </div> */}
 
                             <div className="d-flex align-items-center justify-content-center pb-4">
                                 <p className="mb-0 me-2">Don't have an account?</p>

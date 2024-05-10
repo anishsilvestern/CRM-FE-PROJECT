@@ -1,27 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./Table.css"
+import { HomeContext } from '../Context/HomeContext'
 
 const NewCustomers = () => {
-    const customers = [
-        {
-            id: 1,
-            name: "Customer 1",
-            sold: 123,
-            totalAmt: 1234
-        },
-        {
-            id: 2,
-            name: "Customer 2",
-            sold: 234,
-            totalAmt: 2345
-        },
-        {
-            id: 3,
-            name: "Customer 3",
-            sold: 345,
-            totalAmt: 3456
-        }    
-    ]
+
+    const { NewCustomers } = useContext(HomeContext);
+
   return (
     <div className='table-container'>
         <h3 className='text-center'>New Customers</h3>
@@ -36,12 +20,12 @@ const NewCustomers = () => {
                 </tr>
             </thead>
             <tbody className="table-group-divider">
-            {customers.map((Customer, index) => ( 
+            {NewCustomers.map((Customer, index) => ( 
                 <tr key={index}>  
                 <th scope="row" >{index + 1}</th>
                 <td>{Customer.name}</td>
-                <td>{Customer.sold}</td>
-                <td>{Customer.sold}</td>
+                <td>{Customer.source}</td>
+                <td>{Customer.status}</td>
                 </tr>
             ))} 
             </tbody>

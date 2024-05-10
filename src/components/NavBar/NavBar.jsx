@@ -1,22 +1,23 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './NavBar.css'
-import SearchModal from '../Model/SearchModal'
 import UserModel from '../Model/UserModel'
 
 
 export const NavBar = () => {
 
-  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false)
+  // const [isSearchModalOpen, setIsSearchModalOpen] = useState(false)
   const [isUserModelOpen, setIsUserModelOpen] = useState(false)
 
-  const handleSearchModalOpen = () => {
-    setIsSearchModalOpen(true)
-  }
+  
 
-  const handleSearchModalClose = () => {
-    setIsSearchModalOpen(false)
-  }
+  // const handleSearchModalOpen = () => {
+  //   setIsSearchModalOpen(true)
+  // }
+
+  // const handleSearchModalClose = () => {
+  //   setIsSearchModalOpen(false)
+  // }
 
   const handleUserModalOpen = () => {
     setIsUserModelOpen(true)
@@ -67,13 +68,13 @@ export const NavBar = () => {
 
         {/* search  icon */}
         <div id='navIcons' className='nav-link me-4' >
-          <Link className='me-3' to="/dashboard" onClick={handleSearchModalOpen}><img src="/src/assets/search.svg" /></Link>
+          {/* <Link className='me-3' to="/dashboard" onClick={handleSearchModalOpen}><img src="/src/assets/search.svg" /></Link> */}
           {/* User icon */}
           <Link className='nav-link me-3' to="/dashboard"><img src="/src/assets/user.svg"  onClick={handleUserModalOpen} /></Link>
         </div>
       </div>
     </nav>
-     <SearchModal isSearchOpen={isSearchModalOpen} isSearchCloseModal={handleSearchModalClose} />
+     {/* <SearchModal isSearchOpen={isSearchModalOpen} isSearchCloseModal={handleSearchModalClose} /> */}
      <UserModel isUserOpen={isUserModelOpen} isUserCloseModal={handleUserModelClose} />
   </div>  
   )

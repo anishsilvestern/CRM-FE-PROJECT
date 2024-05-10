@@ -1,7 +1,26 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import axios from "axios"
+import { useContext, useEffect, useState } from "react"
+import { CommunicationContext } from "../../Context/CummunicationContext"
 
 const Communication = () => {
+
+
+    const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+    const token = localStorage.getItem('token')
+
+
+    const { communication } = useContext(CommunicationContext)
+
+    console.log(communication)
+
+    const communicationId = localStorage.getItem('Communicationid')
+
+    const data = communication.filter(communication => communication.customer_id === communicationId)
+
+    console.log(data)
+
+     
+
     return (
         <div>
             <div className='text-center p-3 bg-secondary' style={{color:"white", fontFamily:"sans-serif"}}>
@@ -9,16 +28,18 @@ const Communication = () => {
             </div>
             <div className='container'>
                 <div className="row mt-3" >
-                    <div className="col-md-4 mb-3">
+                  {data.map((data, index) => (  
+                    <div className="col-md-4 mb-3" key={index}>
                         <div className='card'>
                             <div className="card-body">
-                            <p className="card-text"><strong>Communication ID: 100  </strong></p>
-                            <p className="card-text"><strong>Date: 10-05-2024</strong></p>
-                            <p className="card-text"><strong>Method: Meeting </strong></p>
-                            <p className="card-text"><strong>Content: This schema provides a basic structure to store customer profiles, purchase history, communication logs, and feedback in the CRM system. Depending on the specific needs and complexity of the Textile Shop, additional tables and attributes may be required to capture more detailed information and support additional functionalities. </strong></p>
+                            <p className="card-text">Communication ID: <strong> {data.communication_id}  </strong></p>
+                            <p className="card-text">Date:<strong> {data.date}</strong></p>
+                            <p className="card-text">Method:<strong> {data.method} </strong></p>
+                            <p className="card-text">Content:<strong> {data.content} </strong></p>
                             </div>
                         </div>
                     </div>
+                    ))}
                 </div>
             </div>
         </div>

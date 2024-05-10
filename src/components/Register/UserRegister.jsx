@@ -2,8 +2,12 @@ import React from 'react'
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { Link } from 'react-router-dom';
 import "./UserRegister.css"
+import axios from 'axios';
+
 
 const UserRegister = () => {
+
+  const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
 
   return (
     <div>
@@ -29,8 +33,7 @@ const UserRegister = () => {
                                 const error = {};
                                   if(!values.name){
                                     error.name = "name is required"
-                                  }
-                                  if(!values.email){
+                                  }if(!values.email){
                                     error.email = "email is required"
                                   }
                                   if(!values.phoneNumber){
@@ -53,12 +56,35 @@ const UserRegister = () => {
                                   return error;
                             }}
 
-                            onSubmit={ (values) => {
+                            onSubmit={ async (values) => {
 
-                            console.log(values.email.toLowerCase());
-                                    
-                            }}
-                        >
+                            try {
+                              const email = values.email.toLowerCase()
+
+                              const userCheck = await axios.get(apiUrl + `getAdmin/?email=${email}`)
+
+                              console.log(userCheck)
+
+                              if(userCheck.data.length === 0){
+                                const sendDb = await axios.post(apiUrl + `register`, {
+                                name: values.name.trim(),
+                                email: values.email.toLowerCase(),
+                                phoneNumber: values.phoneNumber,
+                                password: values.password,
+                            })
+                             if(sendDb.status === 200){
+                                alert("User created successfully")
+                                window.location.href = "/login"
+                             } else {
+                                alert("User not created")
+                             }
+                              } else {
+                                alert("User already exists")
+                                }
+                            } catch (error) {
+                               console.log("Error")
+                            }}}>
+                              
                             <Form>
 
                                 <h3 className='my-4 text-center'>Fill your details below</h3>
@@ -97,9 +123,9 @@ const UserRegister = () => {
                             </Form>
                         </Formik>
 
-                        <div className="text-center">
+                        {/* <div className="text-center">
                           <Link to="/customer-fil-form"><button id='createBtn' className="btn btn-info btn-block fa-lg gradient-custom-2 mb-3" type="submit">Customer Fill Form</button></Link>
-                        </div>
+                        </div> */}
 
                     </div>
                     </div>

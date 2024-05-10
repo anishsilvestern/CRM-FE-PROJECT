@@ -1,25 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./Table.css"
+import { HomeContext } from '../Context/HomeContext'
 
 const TopProducts = () => {
 
-    const products = [
-        {
-            id: 1,
-            name: "Product 1",
-            sold: 123
-        },
-        {
-            id: 2,
-            name: "Product 2",
-            sold: 234
-        },
-        {
-            id: 3,
-            name: "Product 3",
-            sold: 345 
-        }    
-    ]
+    const { top50Product } = useContext(HomeContext);
+
   return (
     <div className='table-container'>
         <h3 className='text-center'>Top Selling Products</h3>
@@ -33,11 +19,11 @@ const TopProducts = () => {
                 </tr>
             </thead>
             <tbody className="table-group-divider">
-            {products.map((product, index) => ( 
+            {top50Product.map((product, index) => ( 
                 <tr key={index}>  
                 <th scope="row" >{index + 1}</th>
-                <td>{product.name}</td>
-                <td>{product.sold}</td>
+                <td>{product.productName}</td>
+                <td>{product.totalQuantity}</td>
                 </tr>
             ))} 
             </tbody>

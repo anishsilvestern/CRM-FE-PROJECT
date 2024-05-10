@@ -3,7 +3,6 @@ import TopProducts from './TopProducts'
 import PurchasedCustomers from './PurchasedCustomers'
 import MonthsRevenue from './MonthsRevenue'
 import NewCustomers from './NewCustomers'
-import RecentPurchase from './RecentPurchase'
 
 
 
@@ -26,9 +25,6 @@ const Home = () => {
                 <div className="col">
                     <NewCustomers />
                 </div>
-            </div>
-            <div className="row d-flex justify-content-center">
-                    <RecentPurchase />
             </div>
         </div>
     </div>

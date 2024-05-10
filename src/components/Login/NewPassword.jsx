@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './NewPassword.css'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import axios from 'axios'
+import { LoginContext } from '../Context/LoginContext'
 
 const NewPassword = () => {
+
+  const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+
+    const { admin } = useContext(LoginContext)
+
   return (
     <div className='newPasswordDiv'>
         <section className='Container'>
@@ -33,17 +40,31 @@ const NewPassword = () => {
                 }}
 
 
-                onSubmit={(values) => {
-                  console.log(values)
+                onSubmit={ async (values) => {
+                    const queryString = window.location.search;
+                    const urlParams = new URLSearchParams(queryString);
+                    console.log(urlParams.size)
+                    const email = urlParams.size==0 ? admin.email  : urlParams.get('email');
+
+                    console.log(email)
+
+                    const newPassword = await axios.put(apiUrl + `new-password/?email=${email.toLowerCase()}&password=${values.newPassword}`);
+                     if(newPassword.data.length > 0){
+                        alert('Password reset successfully')
+                        window.location.href = '/login'
+                    }else {
+                        alert('Password not reset')
+                    }
+      
                 }}
                 >
                     <Form className='form-group'>
                         <div>
-                        <Field id='newPassword' name="newPassword" type='text' className='form-control' placeholder='New Password' />
+                        <Field id='newPassword' name="newPassword" type='password' className='form-control' placeholder='New Password' />
                         <ErrorMessage name="newPassword" component= 'div' className='text-danger' />
                         </div>
                         <div>
-                        <Field id='Confirm-New-Password' name="confirmNewPassword" type='text' className='form-control mt-3' placeholder='Confirm New Password' />
+                        <Field id='Confirm-New-Password' name="confirmNewPassword" type='password' className='form-control mt-3' placeholder='Confirm New Password' />
                         <ErrorMessage name="confirmNewPassword" component= 'div' className='text-danger' />
                         </div>
                         <div className='d-flex justify-content-center mt-3'>

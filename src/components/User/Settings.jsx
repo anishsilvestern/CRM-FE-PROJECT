@@ -2,6 +2,14 @@ import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
 const Settings = () => {
+
+    const token = localStorage.getItem('token')
+
+    const handleLogout = () => {
+        localStorage.clear()
+        window.location.href = '/'
+    }
+
   return (
     <div>
         <div className='row text-center p-3 bg-danger' style={{color:"white"}} >
@@ -21,16 +29,19 @@ const Settings = () => {
             </div>
         </div>
         <Outlet />
+        <Link style={{textDecoration:"none", color:"black"}} onClick={handleLogout}>
         <div className='row form-outline m-5 '>
             <div className="col-1">
                 <img style={{width:"40px"}} src="/src/assets/log-out.png"/>
             </div>
-
+        
             <div className="col-11">
+            
                 <h3>Logout</h3>
+            
             </div>
         </div>
-
+        </Link> 
     </div>
   )
 }

@@ -1,8 +1,18 @@
-# React + Vite
+# Capstone Project => CRM (Customer Relationship Management)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Front-End - Repo
 
-Currently, two official plugins are available:
+- axios => (Fetch data from back-end)
+- MangoDb => {database}
+- JsonWebToken => (Middlerware Verify)
+- Bcrypt => (Password verify)
+- dotenv => (Store Confidenial one)
+- Auth => (Middlerware)
+- Formik => (Used all form submition)
+- react-router-dom => (to page change)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Netlify Link => Front-End]=> 
+()
+
+[Render Link => Back-End] =>
+(https://crm-be-project.onrender.com)

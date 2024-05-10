@@ -1,27 +1,27 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
+import { ProductContext } from '../Context/ProductContext';
 
 const FullDetailsProduct = () => {
+
+  const { products } = useContext(ProductContext);
+
+  const productId = localStorage.getItem('ProductId')
+
+  const product = products.find(product => product.productId === productId)
 
   return (
     <div>
         <div className='text-center p-3' style={{color:"black", fontFamily:"sans-serif", backgroundColor:"#70FFCD"}}>
-            <h1>Add Product</h1>
+            <h1>Product Id: <b>{ productId }</b></h1>
         </div>
         <Formik 
-        initialValues={{productId:"asa", productName:"",productDescription:"", fabric:'', colour:'', design:'', productPrice:"", productStocks:"", productImageUrl:""}}
+        initialValues={{productRating:product ? product.Rating : "", productName:product ? product.Name : "",productDescription:product ? product.Description : "", fabric:product ? product.FabricType : "", colour:product ? product.Color : "", design:product ? product.DesignType : "", productPrice:product ? product.Price : "", productStocks:product ? product.Stock : "", productImageUrl:product ? product.PhotoUrl : ""}}
+
+        enableReinitialize={true}
         >
             <Form>
-                {/* product Id */}
-                <div data-mdb-input-init className="row form-outline m-4">
-                    <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/product.png"/>
-                    </div>
-                    <div className="col-11">
-                      <Field type="text" name="productId" id="productId"  className="form-control" placeholder="Product Id" readOnly  />
-                    </div>
-                </div>
                 {/* product name */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
@@ -40,6 +40,15 @@ const FullDetailsProduct = () => {
                       <Field as="textarea" type="text" name="productDescription" id="productDescription"  className="form-control" placeholder="Product description" style={{height:"100px"}} readOnly  />
                     </div>
                 </div>
+                {/* product Rating */}
+                <div data-mdb-input-init className="row form-outline m-4">
+                    <div className='col-1'>
+                      <img style={{width:"40px"}} src="/src/assets/star.png"/>
+                    </div>
+                    <div className="col-11">
+                      <Field type="text" name="productRating" id="productRating"  className="form-control" placeholder="productRating" readOnly  />
+                    </div>
+                </div>
                 {/* Fabric type */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
@@ -55,7 +64,7 @@ const FullDetailsProduct = () => {
                       <img style={{width:"40px"}} src="/src/assets/chromatic.png"/>
                     </div>
                     <div className="col-11">
-                    <Field as="select" id="colour" name="colour" className="form-control" readOnly/>
+                    <Field  id="colour" name="colour" className="form-control" readOnly/>
                     </div>
                 </div>
                 {/* Designs */}
@@ -64,7 +73,7 @@ const FullDetailsProduct = () => {
                       <img style={{width:"40px"}} src="/src/assets/batik.png"/>
                     </div>
                     <div className="col-11">
-                    <Field as="select" id="design" name="design" className="form-control" readOnly />
+                    <Field id="design" name="design" className="form-control" readOnly />
                     </div>
                 </div>
                 {/* product Price */}

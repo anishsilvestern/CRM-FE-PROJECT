@@ -1,9 +1,16 @@
 import { Field, Form, Formik, ErrorMessage} from 'formik'
-import React from 'react'
+import React, { useContext } from 'react'
 import './Profile.css'
 import { Link } from 'react-router-dom'
+import { LoginContext } from '../Context/LoginContext'
+import axios from 'axios'
 
 const Profile = () => {
+
+  const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+
+  const { admin } = useContext(LoginContext)
+
   return (
     <div>
         <div>
@@ -12,14 +19,30 @@ const Profile = () => {
                 <Link to="/dashboard"><img id='homeImg' src="/src/assets/home.png"/></Link>
               </div>
               <div className="col-11">
-                <h2><b>T Anish Silvestern</b></h2>
+                <h2><b>{admin.name}</b></h2>
               </div>
             </div>
             <Formik 
-            initialValues={{name:"Anish", email:"neooanish@gmail.com", address:"aanisasasnjdnnn dsndnsdk", phoneNumber:"6532326598"}}
+            initialValues={{name: admin ? admin.name : '', email:admin ? admin.email : '',  phoneNumber:admin ? admin.phoneNumber : '' }}
 
-            onSubmit={(values) => {
-              console.log(values);
+            enableReinitialize={true}
+
+            onSubmit={ async (values) => {
+                const updateAdminDb = await axios.put(apiUrl + "update-admin", {
+                    name: values.name,
+                    email: values.email,
+                    phoneNumber: values.phoneNumber,
+                }, {
+                  headers: {
+                    auth: localStorage.getItem('token')
+                  }
+                })
+                console.log(updateAdminDb)
+                if(updateAdminDb.status === 200){
+                  alert("Profile Updated")
+                } else {
+                  alert("Profile Not Updated")
+                }
             }}
             >
             {/* dirty is a boolean value that is true when the form is dirty and false when the form is pristine */}
@@ -46,17 +69,7 @@ const Profile = () => {
                       <ErrorMessage name="email" component="div" className="text-danger" />
                     </div>
                 </div>
-                {/* address */}
-                <div data-mdb-input-init className="row form-outline m-4">
-                    <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/location.png"/>
-                    </div>
-                    <div className="col-11">
-                      <Field as="textarea" name="address" id="address" className="form-control"
-                      placeholder="address" />
-                      <ErrorMessage name="address" component="div" className="text-danger" />
-                    </div>
-                </div>
+                
               {/* Phone Number */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>

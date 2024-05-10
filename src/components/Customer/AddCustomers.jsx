@@ -1,12 +1,16 @@
+import axios from 'axios';
 import { ErrorMessage, Field, Formik, Form } from 'formik';
-import React from 'react'
+import React, { useContext } from 'react'
+import { PrefernceContext } from '../Context/PreferenceContext';
+
 
 const AddCustomers = () => {
-  const fabricType = ['Cotton', 'Polyester', 'Silk', 'Wool', 'Nylon', 'Leather'];
-  const sources = ['Facebook', 'Instagram', 'Twitter', 'LinkedIn', 'Google', 'Others'];
-  const status = ['Lead', 'Prospect', 'Repeat Customer']
-  const colours = ['Black', 'Blue', 'Brown', 'Green', 'Grey', 'Orange', 'Pink', 'Purple', 'Red', 'White', 'Yellow'];
-  const designs = ["Print Design", 'Woven Design', 'Knitted Design', 'Non-Woven Design', "Embroidery Design", "Digital Textile Design", 'Fashion Textile Design', "Home Textile Design"];
+
+  const { fabricType, colours, designs, status, sources } = useContext(PrefernceContext);
+
+  const token = localStorage.getItem('token')
+
+  const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
 
   return (
     <div>
@@ -45,8 +49,33 @@ const AddCustomers = () => {
               return errors;
             }}
 
-            onSubmit={(values) => {
-              console.log(values);
+            onSubmit={ async (values) => {
+                try {
+                  const AddCustomer = await axios.post(apiUrl + "add-customer", {
+                    name: values.name,
+                    email: values.email.toLowerCase(),
+                    address: values.address,
+                    phone: values.phoneNumber,
+                    source: values.sources,
+                    status: values.status,
+                    fabricType: values.fabricType,
+                    colour: values.colour,
+                    design: values.design
+                  }, {
+                    headers: {
+                      auth: token
+                    }
+                  })
+                  if(AddCustomer.status === 200){
+                    alert("Customer Added Successfully")
+                    window.location.reload()
+                  }else {
+                    alert("Customer Not Added")
+                  }
+                } catch (error) {
+                    console.log(error)
+                    alert("Customer Not Added Please try again")
+                }
             }}
             >
               <Form>

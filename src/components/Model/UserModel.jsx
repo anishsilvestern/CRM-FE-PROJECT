@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './UserModel.css'
+import { LoginContext } from '../Context/LoginContext'
 
 const UserModel = ({ isUserOpen, isUserCloseModal }) => {
+
+    const { admin } = useContext(LoginContext)
+
+    const token = localStorage.getItem('token')
+
+    const handleLogout = () => {
+        localStorage.clear()
+        window.location.reload()
+    }
+
   return (
     <div>
         <div className={`modal-backdrop fade ` + (isUserOpen ? 'show' : '')} style={{ display: isUserOpen ? 'block' : 'none' }} onClick={isUserCloseModal}></div>
@@ -12,8 +23,7 @@ const UserModel = ({ isUserOpen, isUserCloseModal }) => {
                 <div className="modal-content">
                     <div className="modal-header p-0">
                         <div className='modal-title' style={{backgroundColor: "red", color: "white", padding: "20px", width:"100vh"}}>
-                            <h2><b>T Anish Silvestern</b></h2>
-                            <p>Last Login:</p>
+                            <h2><b>{admin.name}</b></h2>
                             <button type="button" className="btn-close" onClick={isUserCloseModal}></button>
                         </div>
                     </div>
@@ -26,7 +36,7 @@ const UserModel = ({ isUserOpen, isUserCloseModal }) => {
                         </div>
 
                         <div className='mt-4'>
-                        <Link  className='px-2' style={{textDecoration: "none", color:"black", fontSize:"20px"}}><img className='imgLogo' src="/src/assets/log-out.svg" /> Logout</Link>
+                        <Link  className='px-2' style={{textDecoration: "none", color:"black", fontSize:"20px"}} onClick={handleLogout}><img className='imgLogo' src="/src/assets/log-out.svg" /> Logout</Link>
                         </div>
                             
                     </div>                       

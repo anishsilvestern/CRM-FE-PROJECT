@@ -1,22 +1,40 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React from 'react'
+import React, { useContext } from 'react'
+import { PrefernceContext } from '../Context/PreferenceContext';
+import { ProductContext } from '../Context/ProductContext';
+import axios from 'axios';
 
 const EditDetailsProduct = () => {
-    const fabricType = ['Cotton', 'Polyester', 'Silk', 'Wool', 'Nylon', 'Leather'];
-    const colours = ['Black', 'Blue', 'Brown', 'Green', 'Grey', 'Orange', 'Pink', 'Purple', 'Red', 'White', 'Yellow'];
-    const designs = ["Print Design", 'Woven Design', 'Knitted Design', 'Non-Woven Design', "Embroidery Design", "Digital Textile Design", 'Fashion Textile Design', "Home Textile Design"];
+
+  const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+
+  const token = localStorage.getItem('token')
+
+  const { fabricType, colours, designs } = useContext(PrefernceContext);
+
+  const { products } = useContext(ProductContext);
+
+  const productId = localStorage.getItem('ProductId')
+
+  const product = products.find(product => product.productId === productId)
+    
   return (
     <div>
         <div className='text-center p-3' style={{color:"black", fontFamily:"sans-serif", backgroundColor:"#70FFCD"}}>
-            <h1>Add Product</h1>
+            <h1>Edit Product</h1>
         </div>
         <Formik 
-        initialValues={{productId:"", productName:"",productDescription:"", fabric:'', colour:'', design:'', productPrice:"", productStocks:"", productImageUrl:""}}
+        initialValues={{productRating:product ? product.Rating : "", 
+        productName:product ? product.Name : "",productDescription:product ? product.Description : "", fabric:product ? product.FabricType : "", 
+        colour:product ? product.Color : "", 
+        design:product ? product.DesignType : "", productPrice:product ? product.Price : "", productStocks:product ? product.Stock : "", productImageUrl:product ? product.PhotoUrl : ""}}
+
+        enableReinitialize={true}
 
         validate={(values) => {
             const errors = {};
-            if (!values.productId) {
-                errors.productId = 'Required';
+            if (!values.productRating) {
+                errors.productRating = 'Required';
             }if (!values.productName) {
                 errors.productName = 'Required';
             }if (!values.productDescription) {
@@ -41,21 +59,38 @@ const EditDetailsProduct = () => {
             return errors;
         }}
 
-        onSubmit={(values) => {
-            console.log(values);
+        onSubmit={ async (values) => {
+            try {
+              const response = await axios.put(apiUrl + "update-product", {
+                productId: productId,
+                Rating: values.productRating,
+                Name: values.productName,
+                Description: values.productDescription,
+                FabricType: values.fabric,
+                Color: values.colour,
+                DesignType: values.design,
+                Price: values.productPrice,
+                Stock: values.productStocks,
+                PhotoUrl: values.productImageUrl
+              }, {
+                headers: {
+                  auth: token
+                }
+              })
+              if(response.status === 200) {
+                alert("Product Updated Successfully")
+                window.location.href = "/dashboard/all-products"
+              }else {
+                  alert("Something went wrong")
+              }
+            } catch (error) {
+              console.log(error)
+              alert("Something went wrong from server")
+            }
         }}
         >
+          {({dirty}) => (
             <Form>
-                {/* product Id */}
-                <div data-mdb-input-init className="row form-outline m-4">
-                    <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/product.png"/>
-                    </div>
-                    <div className="col-11">
-                      <Field type="text" name="productId" id="productId"  className="form-control" placeholder="Product Id"  />
-                      <ErrorMessage name="productId" component="div" className="text-danger" />
-                    </div>
-                </div>
                 {/* product name */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
@@ -76,6 +111,16 @@ const EditDetailsProduct = () => {
                       <ErrorMessage name="productDescription" component="div" className="text-danger" />
                     </div>
                 </div>
+                {/* product Rating */}
+                <div data-mdb-input-init className="row form-outline m-4">
+                    <div className='col-1'>
+                      <img style={{width:"40px"}} src="/src/assets/star.png"/>
+                    </div>
+                    <div className="col-11">
+                      <Field type="text" name="productRating" id="productRating"  className="form-control" placeholder="Product Rating"  />
+                      <ErrorMessage name="productRating" component="div" className="text-danger" />
+                    </div>
+                </div>
                 {/* Fabric type */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
@@ -83,7 +128,7 @@ const EditDetailsProduct = () => {
                     </div>
                     <div className="col-11">
                     <Field as="select" id="fabric" name="fabric" className="form-control">
-                      <option value="">Select a source</option>
+                      <option value="">Select a fabric type</option>
                       {fabricType.map((fabric, index) => (
                       <option value={fabric} key={index}>{fabric}</option>
                     ))}
@@ -98,9 +143,9 @@ const EditDetailsProduct = () => {
                     </div>
                     <div className="col-11">
                     <Field as="select" id="colour" name="colour" className="form-control">
-                      <option value="">Select a source</option>
+                      <option value="">Select a colour</option>
                       {colours.map((colour, index) => (
-                      <option value={colour} key={index}>{colour}</option>
+                      <option value={colour} key={index} >{colour}</option>
                     ))}
                     </Field>
                       <ErrorMessage name="colour" component="div" className="text-danger" />
@@ -113,7 +158,7 @@ const EditDetailsProduct = () => {
                     </div>
                     <div className="col-11">
                     <Field as="select" id="design" name="design" className="form-control">
-                      <option value="">Select a source</option>
+                      <option value="">Select a Design Type</option>
                       {designs.map((design, index) => (
                       <option value={design} key={index}>{design}</option>
                     ))}
@@ -151,10 +196,13 @@ const EditDetailsProduct = () => {
                       <ErrorMessage name="productImageUrl" component="div" className="text-danger" />
                     </div>
                 </div>
-                <div className="text-center mt-5">
-                  <button id='createBtn' className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Add Product</button>
-                </div>
+                {dirty ? (<div className="text-center mt-5">
+                  <button id='createBtn' className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Edit Product</button>
+                </div>) : (<div className="text-center mt-5">
+                  <button id='createBtn' className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" disabled>Edit Product</button>
+                </div>)}
             </Form>
+            )}
         </Formik>
     </div>
   )

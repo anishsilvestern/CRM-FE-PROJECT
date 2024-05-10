@@ -2,8 +2,12 @@ import React from 'react'
 import './EmailSend.css'
 import { Link } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import axios from 'axios'
 
 const EmailSend = () => {
+
+    const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+
   return (
     <div className='emailSendDiv'>
         <section className='Container'>
@@ -28,8 +32,21 @@ const EmailSend = () => {
                     return errors;
                 }}
 
-                onSubmit={(values) => {
-                    console.log(values)
+                onSubmit={ async (values) => {
+
+                    const userCheck = await axios.get(apiUrl + `getAdmin/?email=${values.email.toLowerCase()}`);
+
+                    if(userCheck.data.length !== 0) {
+                        const sendEmail = await axios.get(apiUrl + `forget-password?email=${values.email.toLowerCase()}`);
+
+                        if(sendEmail.data.length > 0){
+                            alert('Email sent successfully')
+                        }else {
+                            alert('Email not sent')
+                        }
+                    }else {
+                        alert('User not found')
+                    }
                 }}
                 >
                 <Form className='form-group'>

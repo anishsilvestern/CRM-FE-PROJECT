@@ -1,20 +1,37 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React from 'react'
+import { Field, Form, Formik } from 'formik';
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
+import { CustomerContext } from '../Context/CustomerContext';
+import { PrefernceContext } from '../Context/PreferenceContext';
 
 const FullDetailsCustomer = () => {
-    const fabricType = ['Cotton', 'Polyester', 'Silk', 'Wool', 'Nylon', 'Leather'];
-    const colours = ['Black', 'Blue', 'Brown', 'Green', 'Grey', 'Orange', 'Pink', 'Purple', 'Red', 'White', 'Yellow'];
-    const designs = ["Print Design", 'Woven Design', 'Knitted Design', 'Non-Woven Design', "Embroidery Design", "Digital Textile Design", 'Fashion Textile Design', "Home Textile Design"];
+
+    const { fabricType, colours, designs, status, sources } = useContext(PrefernceContext);
+
+    const { customers } = useContext(CustomerContext);
+
+    const Customerid = localStorage.getItem('Customerid')
+
+    const data = customers.find(customer => customer.customerId === Customerid)
+
+
+    const handleLocalRemove = () => {
+       if(window.location.pathname !== "/dashboard/full-details-customer") {
+          localStorage.clear("Customerid")
+       }
+    }
 
   return (
     <div>
       <div className='text-center p-3 bg-secondary' style={{color:"white", fontFamily:"sans-serif"}}>
-            <h1>Customer Name</h1>
+            <h1>{data? `Customer Id: ${data.customerId}` : "Customer Id"}</h1>
       </div>
 
       <Formik 
-            initialValues={{name:"Anish", email:"neooanish@gmail.com", address:"mannipady", phoneNumber:"3216549879", sources:"facebook", status:"lead", fabricType:["Cotton", "Polyester"], colour:["Black", "Blue"], design:[]}}
+            initialValues={{name:data ? data.name : "", email:data ? data.email : "", address:data ? data.address : "", phoneNumber:data ? data.phone : "", sources:data ? data.source : "", status:data ? data.status : "", fabricType:data ? data.fabricType : "", colour:data ? data.colour : "", design:data ? data.design : ""}}
+
+          enableReinitialize={true}
+
             >
               <Form>
                 {/* name */}
@@ -135,7 +152,7 @@ const FullDetailsCustomer = () => {
                   </div>
                 </div>
                 <div className="text-center mt-5">
-                  <Link to="/dashboard/all-customers"><button id='createBtn' className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Back</button></Link>
+                  <Link to="/dashboard/all-customers" onClick={handleLocalRemove}><button id='createBtn' className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Back</button></Link>
                 </div>
               </Form>
             </Formik>
