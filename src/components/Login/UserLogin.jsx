@@ -14,7 +14,7 @@ import youtube from '../assets/youtube.svg'
 
 const UserLogin = () => {
 
-    const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+    const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com/" : "http://localhost:4000/"
 
 
   return (

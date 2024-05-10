@@ -9,7 +9,7 @@ export const CommunicationProvider = ({ children }) => {
     const [ communication, setCommunication ] = useState([])
     const [ feedback, setFeedback ] = useState([])
 
-    const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+    const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com/" : "http://localhost:4000/"
 
     const token = localStorage.getItem('token')
 

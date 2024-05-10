@@ -11,7 +11,7 @@ import phoneCall from "../assets/phone-call.png"
 
 const Profile = () => {
 
-  const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+  const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com/" : "http://localhost:4000/"
 
   const { admin } = useContext(LoginContext)
 

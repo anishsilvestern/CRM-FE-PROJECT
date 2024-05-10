@@ -14,7 +14,7 @@ import link from "../assets/link.png"
 
 const AddProduct = () => {
 
-  const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+  const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com/" : "http://localhost:4000/"
 
   const token = localStorage.getItem('token')
 

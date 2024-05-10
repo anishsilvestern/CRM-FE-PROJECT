@@ -7,7 +7,7 @@ export const LoginContext = createContext();
 
 export const LoginProvider = ({ children }) => {
   
-   const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com" : "http://localhost:4000/"
+   const apiUrl = import.meta.env.VITE_LOCAL_URL === "production" ? "https://crm-be-project.onrender.com/" : "http://localhost:4000/"
 
    const [admin, setAdmin] = useState({
     name: "",
