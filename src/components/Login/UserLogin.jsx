@@ -3,6 +3,11 @@ import { Field, Form, Formik, ErrorMessage } from 'formik';
 import './UserLogin.css'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import logo from '../assets/Logo.png'
+import facebook from '../assets/facebook.svg'
+import twitter from '../assets/twitter.svg'
+import instagram from '../assets/instagram.svg'
+import youtube from '../assets/youtube.svg'
 
 
 
@@ -25,7 +30,7 @@ const UserLogin = () => {
                     <div className="card-body p-md-5 mx-md-4">
 
                         <div className="text-center">
-                        <Link to="/"><img src="/src/assets/Logo.png"
+                        <Link to="/"><img src={logo}
                             style={{width: "100px"}} alt="logo" /></Link>
                         <h1 className="mt-1 mb-5 pb-1">Hello,<b>Welcome Back!!!</b></h1>
                         </div>
@@ -102,16 +107,16 @@ const UserLogin = () => {
                             </div>
                             <div className="col-lg-6 d-flex  align-items-center justify-content-center gradient-custom-2 ms-4">
                                 <Link to="/"  className="text-white">
-                                    <img src="/src/assets/facebook.svg" alt="Facebook" />
+                                    <img src={facebook} alt="Facebook" />
                                 </Link>
                                 <Link to="/"  className="text-white">
-                                    <img src="/src/assets/twitter.svg" alt="twitter" />
+                                    <img src={twitter} alt="twitter" />
                                 </Link>
                                 <Link to="/"  className="text-white">
-                                    <img src="/src/assets/youtube.svg" alt="youtube" />
+                                    <img src={youtube} alt="youtube" />
                                 </Link>
                                 <Link to="/" className="text-white">
-                                    <img src="/src/assets/instagram.svg" alt="instagram" />
+                                    <img src={instagram} alt="instagram" />
                                 </Link>
                             </div>
 

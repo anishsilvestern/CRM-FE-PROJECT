@@ -2,6 +2,13 @@ import axios from 'axios';
 import { ErrorMessage, Field, Formik, Form } from 'formik';
 import React, { useContext } from 'react'
 import { PrefernceContext } from '../Context/PreferenceContext';
+import name from "../assets/user.png"
+import mail from "../assets/mail.png"
+import address from "../assets/location.png"
+import phone from "../assets/phone-call.png"
+import fabric from "../assets/fabric.png"
+import chromatic from "../assets/chromatic.png"
+import batik from "../assets/batik.png"
 
 
 const AddCustomers = () => {
@@ -82,7 +89,7 @@ const AddCustomers = () => {
                 {/* name */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/user.png"/>
+                      <img style={{width:"40px"}} src={name}/>
                     </div>
                     <div className="col-11">
                       <Field type="text" name="name" id="name"  className="form-control" placeholder="name"  />
@@ -92,7 +99,7 @@ const AddCustomers = () => {
               {/* email */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/mail.png"/>
+                      <img style={{width:"40px"}} src={mail}/>
                     </div>
                     <div className="col-11">
                       <Field type="email" name="email" id="email" className="form-control"
@@ -103,7 +110,7 @@ const AddCustomers = () => {
                 {/* address */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/location.png"/>
+                      <img style={{width:"40px"}} src={address}/>
                     </div>
                     <div className="col-11">
                       <Field as="textarea" name="address" id="address" className="form-control"
@@ -114,7 +121,7 @@ const AddCustomers = () => {
                 {/* Phone Number */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/phone-call.png"/>
+                      <img style={{width:"40px"}} src={phone}/>
                     </div>
                     <div className="col-11">
                       <Field id="number" name="phoneNumber" className="form-control"
@@ -161,7 +168,7 @@ const AddCustomers = () => {
                 {/* Fabric Type */}
                 <div className="row form-outline m-4">
                   <div className='col-1'>
-                    <img style={{width:"40px"}} src="/src/assets/fabric.png" alt="Icon" />
+                    <img style={{width:"40px"}} src={fabric} alt="Icon" />
                   </div>
                   <div className="col-11">
                     <label htmlFor="fabricType">Fabric Type:</label>
@@ -181,7 +188,7 @@ const AddCustomers = () => {
                 {/* Colour */}
                 <div className="row form-outline m-4">
                   <div className='col-1'>
-                    <img style={{width:"40px"}} src="/src/assets/chromatic.png" alt="Icon" />
+                    <img style={{width:"40px"}} src={chromatic} alt="Icon" />
                   </div>
                   <div className="col-11">
                     <label htmlFor="colour">Colours:</label>
@@ -201,7 +208,7 @@ const AddCustomers = () => {
                     {/* Design */}
                 <div className="row form-outline m-4">
                   <div className='col-1'>
-                    <img style={{width:"40px"}} src="/src/assets/batik.png" alt="Icon" />
+                    <img style={{width:"40px"}} src={batik} alt="Icon" />
                   </div>
                   <div className="col-11">
                     <label htmlFor="design">Designs:</label>

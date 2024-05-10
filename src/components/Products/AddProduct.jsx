@@ -2,6 +2,15 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React, { useContext } from 'react'
 import { PrefernceContext } from '../Context/PreferenceContext';
 import axios from 'axios';
+import box from "../assets/box.png"
+import Description from "../assets/product-description.png"
+import fabric from "../assets/fabric.png"
+import chromatic from "../assets/chromatic.png"
+import batik from "../assets/batik.png"
+import priceTag from "../assets/price-tag.png"
+import stock from "../assets/productstock.png"
+import link from "../assets/link.png"
+
 
 const AddProduct = () => {
 
@@ -78,7 +87,7 @@ const AddProduct = () => {
                 {/* product name */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/box.png"/>
+                      <img style={{width:"40px"}} src={box}/>
                     </div>
                     <div className="col-11">
                       <Field type="text" name="productName" id="productName"  className="form-control" placeholder="Product Name"  />
@@ -88,7 +97,7 @@ const AddProduct = () => {
                 {/* product description */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/product-description.png"/>
+                      <img style={{width:"40px"}} src={Description}/>
                     </div>
                     <div className="col-11">
                       <Field as="textarea" type="text" name="productDescription" id="productDescription"  className="form-control" placeholder="Product description" style={{height:"100px"}}  />
@@ -98,7 +107,7 @@ const AddProduct = () => {
                 {/* Fabric type */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/fabric.png"/>
+                      <img style={{width:"40px"}} src={fabric}/>
                     </div>
                     <div className="col-11">
                     <Field as="select" id="fabric" name="fabric" className="form-control">
@@ -113,7 +122,7 @@ const AddProduct = () => {
                 {/* Colour */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/chromatic.png"/>
+                      <img style={{width:"40px"}} src={chromatic}/>
                     </div>
                     <div className="col-11">
                     <Field as="select" id="colour" name="colour" className="form-control">
@@ -128,7 +137,7 @@ const AddProduct = () => {
                 {/* Designs */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/batik.png"/>
+                      <img style={{width:"40px"}} src={batik}/>
                     </div>
                     <div className="col-11">
                     <Field as="select" id="design" name="design" className="form-control">
@@ -143,7 +152,7 @@ const AddProduct = () => {
                 {/* product Price */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/price-tag.png"/>
+                      <img style={{width:"40px"}} src={priceTag}/>
                     </div>
                     <div className="col-11">
                       <Field type="text" name="productPrice" id="productPrice"  className="form-control" placeholder="Product Price" />
@@ -153,7 +162,7 @@ const AddProduct = () => {
                 {/* product Stocks */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/productstock.png"/>
+                      <img style={{width:"40px"}} src={stock}/>
                     </div>
                     <div className="col-11">
                       <Field type="text" name="productStocks" id="productStocks"  className="form-control" placeholder="Product Stocks" />
@@ -163,7 +172,7 @@ const AddProduct = () => {
                 {/* product Image */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/link.png"/>
+                      <img style={{width:"40px"}} src={link}/>
                     </div>
                     <div className="col-11">
                       <Field type="text" name="productImageUrl" id="productImageUrl"  className="form-control" placeholder="Product Image Url" />

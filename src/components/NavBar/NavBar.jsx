@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './NavBar.css'
 import UserModel from '../Model/UserModel'
+import user from '../assets/user.svg'
 
 
 export const NavBar = () => {
@@ -70,7 +71,7 @@ export const NavBar = () => {
         <div id='navIcons' className='nav-link me-4' >
           {/* <Link className='me-3' to="/dashboard" onClick={handleSearchModalOpen}><img src="/src/assets/search.svg" /></Link> */}
           {/* User icon */}
-          <Link className='nav-link me-3' to="/dashboard"><img src="/src/assets/user.svg"  onClick={handleUserModalOpen} /></Link>
+          <Link className='nav-link me-3' to="/dashboard"><img src={user}  onClick={handleUserModalOpen} /></Link>
         </div>
       </div>
     </nav>

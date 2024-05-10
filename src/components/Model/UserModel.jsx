@@ -2,6 +2,10 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './UserModel.css'
 import { LoginContext } from '../Context/LoginContext'
+import profile from "../assets/manage_accounts_FILL0_wght400_GRAD0_opsz24.svg"
+import Setting from "../assets/settings_FILL0_wght400_GRAD0_opsz24.svg"
+import logout from "../assets/log-out.svg"
+
 
 const UserModel = ({ isUserOpen, isUserCloseModal }) => {
 
@@ -29,14 +33,14 @@ const UserModel = ({ isUserOpen, isUserCloseModal }) => {
                     </div>
                     <div className='modal-body ms-4'>
                         <div >  
-                            <Link to="/profile" className='px-2' style={{textDecoration: "none", color:"black", fontSize:"20px"}}><img className='imgLogo' src="/src/assets/manage_accounts_FILL0_wght400_GRAD0_opsz24.svg" /> Profile</Link>
+                            <Link to="/profile" className='px-2' style={{textDecoration: "none", color:"black", fontSize:"20px"}}><img className='imgLogo' src={profile}/> Profile</Link>
                         </div>
                         <div className='mt-4'>
-                        <Link to="/settings" className='px-2' style={{textDecoration: "none", color:"black", fontSize:"20px"}}><img className='imgLogo' src="/src/assets/settings_FILL0_wght400_GRAD0_opsz24.svg" /> Settings</Link>
+                        <Link to="/settings" className='px-2' style={{textDecoration: "none", color:"black", fontSize:"20px"}}><img className='imgLogo' src={Setting} /> Settings</Link>
                         </div>
 
                         <div className='mt-4'>
-                        <Link  className='px-2' style={{textDecoration: "none", color:"black", fontSize:"20px"}} onClick={handleLogout}><img className='imgLogo' src="/src/assets/log-out.svg" /> Logout</Link>
+                        <Link  className='px-2' style={{textDecoration: "none", color:"black", fontSize:"20px"}} onClick={handleLogout}><img className='imgLogo' src={logout} /> Logout</Link>
                         </div>
                             
                     </div>                       

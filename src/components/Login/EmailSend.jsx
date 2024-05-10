@@ -3,6 +3,7 @@ import './EmailSend.css'
 import { Link } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
+import lock from "../assets/lock.svg"
 
 const EmailSend = () => {
 
@@ -12,7 +13,7 @@ const EmailSend = () => {
     <div className='emailSendDiv'>
         <section className='Container'>
             <div className='d-flex justify-content-center'>
-                <img style={{height: "100px"}} className='my-5' src='/src/assets/lock.svg' />
+                <img style={{height: "100px"}} className='my-5' src={lock} />
             </div>
             <h1 className='text-center'><b>Forgot Password</b></h1>
             <p className='text-center'><b>Enter your registered email to reset your password.</b></p>

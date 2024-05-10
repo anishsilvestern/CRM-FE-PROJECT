@@ -4,6 +4,7 @@ import './NewPassword.css'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
 import { LoginContext } from '../Context/LoginContext'
+import key from "../assets/key.svg"
 
 const NewPassword = () => {
 
@@ -15,7 +16,7 @@ const NewPassword = () => {
     <div className='newPasswordDiv'>
         <section className='Container'>
         <div className='d-flex justify-content-center'>
-                <img style={{height: "100px"}} className='my-5' src='/src/assets/key.svg' />
+                <img style={{height: "100px"}} className='my-5' src={key} />
             </div>
             <h1 className='text-center'><b>New Password</b></h1>
             <p className='text-center'><b>Enter your New password.</b></p>

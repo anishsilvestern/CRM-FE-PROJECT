@@ -4,6 +4,10 @@ import './Profile.css'
 import { Link } from 'react-router-dom'
 import { LoginContext } from '../Context/LoginContext'
 import axios from 'axios'
+import home from "../assets/home.png"
+import mail from "../assets/mail.png"
+import user from "../assets/user.png"
+import phoneCall from "../assets/phone-call.png"
 
 const Profile = () => {
 
@@ -16,7 +20,7 @@ const Profile = () => {
         <div>
             <div className='row text-center p-3 bg-danger' style={{color:"white"}} >
               <div className="col">
-                <Link to="/dashboard"><img id='homeImg' src="/src/assets/home.png"/></Link>
+                <Link to="/dashboard"><img id='homeImg' src={home}/></Link>
               </div>
               <div className="col-11">
                 <h2><b>{admin.name}</b></h2>
@@ -51,7 +55,7 @@ const Profile = () => {
                 {/* Name */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/user.png"/>
+                      <img style={{width:"40px"}} src={user}/>
                     </div>
                     <div className="col-11">
                       <Field type="text" name="name" id="name"  className="form-control" placeholder="name"  />
@@ -61,7 +65,7 @@ const Profile = () => {
               {/* email */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/mail.png"/>
+                      <img style={{width:"40px"}} src={mail}/>
                     </div>
                     <div className="col-11">
                       <Field type="email" name="email" id="email" className="form-control"
@@ -73,7 +77,7 @@ const Profile = () => {
               {/* Phone Number */}
                 <div data-mdb-input-init className="row form-outline m-4">
                     <div className='col-1'>
-                      <img style={{width:"40px"}} src="/src/assets/phone-call.png"/>
+                      <img style={{width:"40px"}} src={phoneCall}/>
                     </div>
                     <div className="col-11">
                       <Field id="number" name="phoneNumber" className="form-control"

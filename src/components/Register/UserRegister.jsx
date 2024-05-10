@@ -3,6 +3,8 @@ import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { Link } from 'react-router-dom';
 import "./UserRegister.css"
 import axios from 'axios';
+import logo from '../assets/Logo.png'
+
 
 
 const UserRegister = () => {
@@ -21,7 +23,7 @@ const UserRegister = () => {
                     <div className="card-body p-md-5 mx-md-4">
 
                         <div className="text-center">
-                        <Link to="/"><img src="/src/assets/Logo.png"
+                        <Link to="/"><img src={logo}
                             style={{width: "100px"}} alt="logo" /></Link>
                         </div>
                         
