@@ -46,6 +46,9 @@ function calculateMonthlyRevenue(monthlyRevenues) {
 
   const monthlyRevenue = calculateMonthlyRevenue(monthlyRevenues);
 
+  const orderMonths = monthlyRevenue.sort((a, b) => new Date(b.month) - new Date(a.month));
+
+
     
   return (
     <div className='table-container'>
@@ -59,7 +62,7 @@ function calculateMonthlyRevenue(monthlyRevenues) {
                 </tr>
             </thead>
             <tbody className="table-group-divider">
-            {monthlyRevenue.map((revenue, index) => ( 
+            {orderMonths.map((revenue, index) => ( 
                 <tr key={index}>  
                 <th scope="row" >{revenue.month}</th>
                 <td>{`₹${revenue.totalRevenue}`}</td>
