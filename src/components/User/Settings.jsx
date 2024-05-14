@@ -17,34 +17,37 @@ const Settings = () => {
   return (
     <div>
         <div className='row text-center p-3 bg-danger' style={{color:"white"}} >
-            <div className="col">
+            <div className="col-1">
             <Link to="/dashboard"><img id='homeImg' src={home}/></Link>
             </div>
             <div className="col-11">
             <h2><b>Settings</b></h2>
             </div>
         </div>
-        <div className='row form-outline m-5 '>
-            <div className="col-1">
-                <img style={{width:"40px"}} src={changePassword}/>
+
+        {/* change password button */}
+        <div className='row form-outline m-5'>
+            <div className="col-3 col-md-3">
+                <img style={{width:"40px", marginBottom:"10px"}} src={changePassword}/>
             </div>
-            <div className="col-11">
+            <div className="col-9 col-md-9">
                 <Link to="new-password" style={{textDecoration:"none", color:"black"}}><h3>Change Password</h3></Link>
             </div>
         </div>
+
+        {/* new password form */}
         <Outlet />
+
+        {/* Logout button */}
         <Link style={{textDecoration:"none", color:"black"}} onClick={handleLogout}>
-        <div className='row form-outline m-5 '>
-            <div className="col-1">
-                <img style={{width:"40px"}} src={logout}/>
+            <div className='row form-outline m-5 '>
+                <div className="col-3 col-md-3">
+                    <img style={{width:"40px", marginBottom:"10px"}} src={logout}/>
+                </div>
+                <div className="col-9 col-md-9"> 
+                    <h3>Logout</h3>
+                </div>
             </div>
-        
-            <div className="col-11">
-            
-                <h3>Logout</h3>
-            
-            </div>
-        </div>
         </Link> 
     </div>
   )

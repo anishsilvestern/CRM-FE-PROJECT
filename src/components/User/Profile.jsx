@@ -19,7 +19,7 @@ const Profile = () => {
     <div>
         <div>
             <div className='row text-center p-3 bg-danger' style={{color:"white"}} >
-              <div className="col">
+              <div className="col-1">
                 <Link to="/dashboard"><img id='homeImg' src={home}/></Link>
               </div>
               <div className="col-11">
@@ -53,9 +53,9 @@ const Profile = () => {
             {({dirty}) => (
               <Form>
                 {/* Name */}
-                <div data-mdb-input-init className="row form-outline m-4">
-                    <div className='col-1'>
-                      <img style={{width:"40px"}} src={user}/>
+                <div data-mdb-input-init className="row form-outline m-4 ">
+                    <div className='col-1 mb-3'>
+                      <img  style={{width:"40px"}} src={user}/>
                     </div>
                     <div className="col-11">
                       <Field type="text" name="name" id="name"  className="form-control" placeholder="name"  />
@@ -64,7 +64,7 @@ const Profile = () => {
                 </div>
               {/* email */}
                 <div data-mdb-input-init className="row form-outline m-4">
-                    <div className='col-1'>
+                    <div className='col-1 mb-3'>
                       <img style={{width:"40px"}} src={mail}/>
                     </div>
                     <div className="col-11">
@@ -76,7 +76,7 @@ const Profile = () => {
                 
               {/* Phone Number */}
                 <div data-mdb-input-init className="row form-outline m-4">
-                    <div className='col-1'>
+                    <div className='col-1 mb-3'>
                       <img style={{width:"40px"}} src={phoneCall}/>
                     </div>
                     <div className="col-11">

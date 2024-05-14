@@ -40,7 +40,7 @@ export const NavBar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ">
-            <li className="nav-item me-5">
+            <li className="nav-item mx-3  me-md-5">
               <Link className="nav-link active" aria-current="page" to="home"><b>Home</b></Link>
             </li>
             <div className="dropdown">
@@ -54,7 +54,7 @@ export const NavBar = () => {
                 <li><Link className="dropdown-item" to="add-customer">Add Customer</Link></li>
               </ul>
             </div>
-            <div className="dropdown mx-5">
+            <div className="dropdown mx-md-5">
               <Link className="btn dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <b>Products</b>
               </Link>
@@ -71,7 +71,7 @@ export const NavBar = () => {
         <div id='navIcons' className='nav-link me-4' >
           {/* <Link className='me-3' to="/dashboard" onClick={handleSearchModalOpen}><img src="/src/assets/search.svg" /></Link> */}
           {/* User icon */}
-          <Link className='nav-link me-3' to="/dashboard"><img src={user}  onClick={handleUserModalOpen} /></Link>
+          <Link className='nav-link me-sm-5' to="/dashboard"><img src={user}  onClick={handleUserModalOpen} /></Link>
         </div>
       </div>
     </nav>

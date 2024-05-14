@@ -26,9 +26,9 @@ const UserModel = ({ isUserOpen, isUserCloseModal }) => {
             <div className="modal-dialog modal-dialog-scrollable">
                 <div className="modal-content">
                     <div className="modal-header p-0">
-                        <div className='modal-title' style={{backgroundColor: "red", color: "white", padding: "20px", width:"100vh"}}>
+                        <div className='modal-title' style={{backgroundColor: "red", color: "white", padding: "20px", width:"100vh", display:"flex", justifyContent:"space-between"}}>
                             <h2><b>{admin.name}</b></h2>
-                            <button type="button" className="btn-close" onClick={isUserCloseModal}></button>
+                            <button type="button" className="btn btn-light" onClick={isUserCloseModal}><b>X</b></button>
                         </div>
                     </div>
                     <div className='modal-body ms-4'>

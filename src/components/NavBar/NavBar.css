@@ -18,5 +18,26 @@
 }
 
 @media (max-width: 768px) {
-  
+  .navbar-toggler {
+    /* position: absolute; */
+  }
+
+  .navbar-collapse {
+
+    top: 100%; /* Position the navbar content below the navbar-toggler */
+  }
+
+    /* #title {
+      background-color: rgb(0, 255, 255);
+      color: rgb(47, 0, 255);
+      border-radius: 10px 20px;
+      padding: 10px;
+      font-weight: bolder;
+      box-shadow: 0 2px 4px rgb(0, 0, 0);
+      margin-left: 100px;
+    } */
+
+    #navIcons {
+      
+    }
 }
